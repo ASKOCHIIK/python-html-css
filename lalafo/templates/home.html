@@ -1,0 +1,97 @@
+{% load static %}
+
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LALAFO — Объявления Кыргызстана</title>
+
+<link rel="stylesheet" href="{% static 'lalafo/css/style.css' %}">
+
+<style>
+    .empty-image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        font-size: 50px;
+        background: #e5e7eb;
+    }
+
+    .category {
+        position: relative;
+    }
+
+    .category h2 {
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    }
+</style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">LALAFO</div>
+        <div class="header-text">
+        Доска объявлений Кыргызстана
+        </div>
+    </header>
+    <main class="container">
+        <h1 class="title">
+    Добро пожаловать в Lalafo!
+</h1>
+
+<p class="subtitle">
+    Покупай, продавай и находи всё необходимое в одном месте.
+</p>
+
+
+<h2 style="margin-bottom: 20px;">
+    Популярные категории
+</h2>
+
+
+<div class="categories">
+
+    {% for category in categories %}
+
+        <a class="category"
+           href="{% url 'category_products' category.slug %}">
+
+            {% if category.image %}
+
+                <img src="{{ category.image.url }}"
+                     alt="{{ category.title }}">
+
+            {% else %}
+
+                <div class="empty-image">
+                    📦
+                </div>
+
+            {% endif %}
+
+            <h2>
+                {{ category.title }}
+            </h2>
+
+        </a>
+
+    {% empty %}
+
+        <p>
+            Категории пока не добавлены.
+        </p>
+
+    {% endfor %}
+
+</div>
+    </main>
+    <footer style="text-align: center; padding: 30px; color: #888;">
+        @ 2026 BOOTCAMP 48 все права защищены.
+    </footer>
+
+
+</body>
+</html>
